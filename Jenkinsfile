@@ -35,7 +35,7 @@ node('master')
 
     stage('Build Solution')
     {
-        powershell '.\\build.ps1 BuildSolution'
+        powershell '.\\build.ps1 BuildSolution'  
     }
 
     stage('Copy Artifacts')
