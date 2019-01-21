@@ -71,14 +71,5 @@ node('master')
 
         archiveArtifacts '*.xml'
         nunit testResultsPattern: 'TestResult1.xml, TestResult2.xml'
-
-        if(isFailed)
-        {
-            slackSend color: 'danger', message: 'Tests failed.'
-        }
-        else
-        {
-            slackSend color: 'good', message: 'Tests passed.'
-        }
     }
 }
