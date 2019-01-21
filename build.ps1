@@ -5,6 +5,15 @@ param
     [Parameter()]
     [String[]] $TaskList = @("RestorePackages", "Build", "CopyArtifacts"),
     
+    [Parameter()]
+	[String] $Configuration = "Debug",
+	
+	[Parameter()]
+	[String] $Platform = "Any CPU",
+	
+	[Parameter()]
+	[String] $OutputPath = "bin\Debug",
+
     # Also add following parameters: 
     #   Configuration
     #   Platform
@@ -20,6 +29,8 @@ param
 
 $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 $NugetExe = Join-Path $PSScriptRoot "nuget.exe"
+$MSBuildPath = "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/MSBuild/15.0/Bin/MSBuild.exe"
+$SolutionPath = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln"
 # Define additional variables here (MSBuild path, etc.)
 
 Function DownloadNuGet()
@@ -35,6 +46,7 @@ Function RestoreNuGetPackages()
 {
     DownloadNuGet
     Write-Output 'Restoring NuGet packages...'
+    C:/Jars/NUnit.org/nuget.exe restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln
     # NuGet.exe call here
 }
 
