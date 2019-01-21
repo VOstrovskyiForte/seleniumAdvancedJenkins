@@ -13,7 +13,7 @@ def RunNUnitTests(String pathToDll, String condition, String reportName)
 {
     try
     {
-        bat '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" "$buildArtifactsFolder/PhpTravels.UITests.dll" $condition --result=$reportName'
+        bat '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" "C:/BuildPackagesFromPipeline/$BUILD_ID/PhpTravels.UITests.dll" $condition --result=$reportName'
     }
     finally
     {
