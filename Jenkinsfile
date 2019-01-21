@@ -25,12 +25,12 @@ node('master')
 {
     stage('Checkout')
     {
-        git branch: branch, url: 'https://github.com/PixelScrounger/atata-phptravels-uitests.git'
+        git branch: branch, url: 'https://github.com/VOstrovskyiForte/seleniumAdvancedJenkins.git'
     }
     
     stage('Restore NuGet')
     {
-        bat '"C:/Dev/nuget.exe" restore src/PhpTravels.UITests.sln'
+        bat '"C:/Program Files (x86)/Jenkins/apps/nuget.exe" restore src/SeleniumAdvanced-second-lection.sln'
     }
 
     stage('Build Solution')
