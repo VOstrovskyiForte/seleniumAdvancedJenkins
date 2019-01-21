@@ -30,7 +30,7 @@ node('master')
     
     stage('Restore NuGet')
     {
-        bat '"C:/Program Files (x86)/Jenkins/apps/nuget.exe" restore src/SeleniumAdvanced-second-lection.sln'
+        bat '"C:/Program Files (x86)/Jenkins/apps/nuget.exe" restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln'
     }
 
     stage('Build Solution')
