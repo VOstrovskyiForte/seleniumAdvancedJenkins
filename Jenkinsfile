@@ -56,7 +56,7 @@ catchError
         }, SecondTest: {
             node('Slave') {
                 RunNUnitTests("$buildArtifactsFolder/SeleniumAdvanced-second-lection.dll", "--where cat==SecondTest", "TestResult2.xml")
-            }
+            }  
         }
     }
     isFailed = false
