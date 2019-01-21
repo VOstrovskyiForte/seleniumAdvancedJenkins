@@ -12,7 +12,7 @@ param
 	[String] $Platform = "Any CPU",
 	
 	[Parameter()]
-	[String] $OutputPath = "bin\Debug",
+	[String] $OutputPath = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection/bin/Debug",
 
     # Also add following parameters: 
     #   Configuration
@@ -31,6 +31,7 @@ $NugetUrl = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
 $NugetExe = Join-Path $PSScriptRoot "nuget.exe"
 $MSBuildPath = "C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/MSBuild/15.0/Bin/MSBuild.exe"
 $SolutionPath = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln"
+$DebugPath = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection/bin/Debug"
 # Define additional variables here (MSBuild path, etc.)
 
 Function DownloadNuGet()
@@ -46,26 +47,34 @@ Function RestoreNuGetPackages()
 {
     DownloadNuGet
     Write-Output 'Restoring NuGet packages...'
-    C:/Jars/NUnit.org/nuget.exe restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln
+    C:/Jars/NUnit.org/nuget.exe restore $SolutionPath
     # NuGet.exe call here
 }
 
 Function BuildSolution()
 {
     Write-Output "Building '$Solution' solution..."
-    $MSBuildPath $SolutionPath /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath  
+    $MSBuildPath "$SolutionPath /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath"  
     # MSBuild.exe call here
 }
 
 Function CopyBuildArtifacts()
 {
-    param
+    Param
     (
         [Parameter(Mandatory)]
         [String] $SourceFolder,
         [Parameter(Mandatory)]
         [String] $DestinationFolder
     )
+
+    if (-not (Test-Path -Path $DestinationFolder))
+    {
+        New-Item -Path $DestinationFolder -Type Directory
+    }
+
+    Copy-Item -Path $SourceFolder\* -Destination $DestinationFolder -Recurse
+    Write-Output 'Copyingfiles'
 
     # Copy all files from $SourceFolder to $DestinationFolder
     #
@@ -91,8 +100,8 @@ foreach ($Task in $TaskList) {
     {
         BuildSolution
     }
-    if ($Task.ToLower() -eq 'copyartifacts')
-    {
-        CopyBuildArtifacts "YOUR FOLDER WITH BUILT DLLS" "$BuildArtifactsFolder"
-    }
+    #if ($Task.ToLower() -eq 'copyartifacts')
+    #{
+    #    CopyBuildArtifacts $OutputPath "$BuildArtifactsFolder"
+    #}
 }

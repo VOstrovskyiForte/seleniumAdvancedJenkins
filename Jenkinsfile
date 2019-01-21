@@ -7,6 +7,7 @@ properties([
 def isFailed = false
 def branch = params.branchName
 def buildArtifactsFolder = "C:/BuildPackagesFromPipeline/$BUILD_ID"
+def debugFolder = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection/bin/Debug"
 currentBuild.description = "Branch: $branch"
 
 def RunNUnitTests(String pathToDll, String condition, String reportName)
@@ -39,8 +40,8 @@ node('master')
     }
 
     stage('Copy Artifacts')
-    {
-        bat "(robocopy SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection/bin/Debug $buildArtifactsFolder /MIR /XO) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
+    {        
+        powershell ".\\build.ps1 CopyBuildArtifacts $debugFolder $buildArtifactsFolder"  
     }
 }
 
