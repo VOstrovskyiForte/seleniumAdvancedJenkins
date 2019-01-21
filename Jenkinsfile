@@ -7,14 +7,13 @@ properties([
 def isFailed = false
 def branch = params.branchName
 def buildArtifactsFolder = "C:/BuildPackagesFromPipeline/$BUILD_ID"
-def pathToDllFile = "SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection/bin/Debug/SeleniumAdvanced-second-lection.dll"
 currentBuild.description = "Branch: $branch"
 
 def RunNUnitTests(String pathToDll, String condition, String reportName)
 {
     try
     {
-        bat '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" $pathToDllFile $condition --result=$reportName'
+        bat '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" $pathToDll $condition --result=$reportName'
     }
     finally
     {
