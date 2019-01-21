@@ -73,6 +73,9 @@ Function CopyBuildArtifacts()
         New-Item -Path $DestinationFolder -Type Directory
     }
 
+    Write-Output "Copyingfiles '$SourceFolder'"
+    Write-Output "Copyingfiles '$DestinationFolder'"
+
     Copy-Item -Path $SourceFolder\* -Destination $DestinationFolder -Recurse
     Write-Output 'Copyingfiles'
 
