@@ -13,7 +13,7 @@ def RunNUnitTests(String pathToDll, String condition, String reportName)
 {
     try
     {
-        bat '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" "C:/BuildPackagesFromPipeline/$BUILD_ID/PhpTravels.UITests.dll" $condition --result=$reportName'
+        bat "C:/Jars/NUnit.org/nunit-console/nunit3-console.exe $pathToDll $condition --result=$reportName"
     }
     finally
     {
@@ -51,11 +51,11 @@ catchError
     {
         parallel FirstTest: {
             node('master') {
-                RunNUnitTests("C:/BuildPackagesFromPipeline/$BUILD_ID/SeleniumAdvanced-second-lection.dll", "--where cat==FirstTest", "TestResult1.xml")
+                RunNUnitTests("$buildArtifactsFolder/SeleniumAdvanced-second-lection.dll", "--where cat==FirstTest", "TestResult1.xml")
             }
         }, SecondTest: {
             node('Slave') {
-                RunNUnitTests("C:/BuildPackagesFromPipeline/$BUILD_ID/SeleniumAdvanced-second-lection.dll", "--where cat==SecondTest", "TestResult2.xml")
+                RunNUnitTests("$buildArtifactsFolder/SeleniumAdvanced-second-lection.dll", "--where cat==SecondTest", "TestResult2.xml")
             }
         }
     }
