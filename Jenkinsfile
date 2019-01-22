@@ -31,19 +31,19 @@ node('master')
     
     stage('Restore NuGet')
     {
-        powershell '.\\build.ps1 RestoreNuGetPackages'
+        powershell '.\\build.ps1 RestorePackages'
         //bat '"C:/Jars/NUnit.org/nuget.exe" restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln'
     }
 
     stage('Build Solution')
     {
-        powershell '.\\build.ps1 BuildSolution'  
+        powershell '.\\build.ps1 Build'  
         //bat '"C:/Program Files (x86)/Microsoft Visual Studio/2017/Enterprise/MSBuild/15.0/Bin/MSBuild.exe" SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln'
     }
 
     stage('Copy Artifacts')
     {         
-        powershell ".\\build.ps1 -BuildArtifactsFolder $buildArtifactsFolder CopyBuildArtifacts $debugFolder $buildArtifactsFolder"
+        powershell ".\\build.ps1 CopyArtifacts -BuildArtifactsFolder $buildArtifactsFolder"
     }
 }
 
