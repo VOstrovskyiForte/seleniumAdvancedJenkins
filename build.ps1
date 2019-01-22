@@ -47,14 +47,14 @@ Function RestoreNuGetPackages()
 {
     DownloadNuGet
     Write-Output 'Restoring NuGet packages...'
-    #C:/Jars/NUnit.org/nuget.exe restore $SolutionPath
+    C:/Jars/NUnit.org/nuget.exe restore $SolutionPath
     # NuGet.exe call here
 }
 
 Function BuildSolution()
 {
     Write-Output "Building '$Solution' solution..."
-    #$MSBuildPath "$SolutionPath /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath"  
+    & $MSBuildPath "$SolutionPath /p:Configuration=$Configuration /p:Platform=$Platform /p:OutputPath=$OutputPath"  
     # MSBuild.exe call here
 }
 
@@ -103,8 +103,8 @@ foreach ($Task in $TaskList) {
     {
         BuildSolution
     }
-    #if ($Task.ToLower() -eq 'copyartifacts')
-    #{
-    #    CopyBuildArtifacts $OutputPath "$BuildArtifactsFolder"
-    #}
+    if ($Task.ToLower() -eq 'copyartifacts')
+    {
+        CopyBuildArtifacts $OutputPath "$BuildArtifactsFolder"
+    }
 }
