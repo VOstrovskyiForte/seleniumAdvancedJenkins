@@ -14,7 +14,7 @@ def RunNUnitTests(String pathToDll, String condition, String reportName)
 {
     try
     {
-        bat "C:/Jars/NUnit.org/nunit-console/nunit3-console.exe $pathToDll $condition --result=$reportName"
+        bat "C:/NunitFolder/NUnit.org/nunit-console/nunit3-console.exe $pathToDll $condition --result=$reportName"
     }
     finally
     {
@@ -32,7 +32,7 @@ node('master')
     stage('Restore NuGet')
     {
         powershell '.\\build.ps1 RestorePackages'
-        //bat '"C:/Jars/NUnit.org/nuget.exe" restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln'
+        //bat '"C:/NugetFolder/nuget.exe" restore SeleniumAdvanced-second-lection/SeleniumAdvanced-second-lection.sln'
     }
 
     stage('Build Solution')

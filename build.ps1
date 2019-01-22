@@ -47,7 +47,7 @@ Function RestoreNuGetPackages()
 {
     DownloadNuGet
     Write-Output 'Restoring NuGet packages...'
-    C:/Jars/NUnit.org/nuget.exe restore $SolutionPath
+    C:/NugetFolder/nuget.exe restore $SolutionPath
     # NuGet.exe call here
 }
 
